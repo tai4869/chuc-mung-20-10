@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="vi" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Chúc Mừng 20/10 - Chị Bao Thị Quỳnh Như</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&family=Dancing+Script:wght@600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Tone.js for soft ambient background music -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script>
+    <!-- Canvas Confetti -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        roseGold: '#E0A899',
+                        softPink: '#FDF2F4',
+                        deepRose: '#AD1457',
+                        champagne: '#FDF8E2',
+                        warmGold: '#C5A059'
+                    },
+                    fontFamily: {
+                        serif: ['Playfair Display', 'serif'],
+                        sans: ['Montserrat', 'sans-serif'],
+                        script: ['Dancing Script', 'cursive']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Mobile optimization & touch improvements */
+        * {
+            -webkit-tap-highlight-color: transparent;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(135deg, #fef6f8 0%, #fffbf2 100%);
+            color: #2c2c2c;
+            overflow-x: hidden;
+        }
+        @keyframes floatPetal {
+            0% { transform: translateY(-10vh) translateX(0) rotate(0deg); opacity: 0.9; }
+            50% { transform: translateY(50vh) translateX(30px) rotate(180deg); opacity: 0.7; }
+            100% { transform: translateY(105vh) translateX(-20px) rotate(360deg); opacity: 0; }
+        }
+        .petal {
+            position: fixed;
+            top: -10vh;
+            z-index: 10;
+            pointer-events: none;
+            animation: floatPetal linear infinite;
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(197, 160, 89, 0.25);
+        }
+        .glow-gold {
+            text-shadow: 0 0 15px rgba(197, 160, 89, 0.4);
+        }
+        /* Hide scrollbars for smooth mobile carousels */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="relative min-h-screen pb-16">
+
+    <!-- Falling Petals Container -->
+    <div id="petals-container" class="absolute inset-0 pointer-events-none overflow-hidden z-10"></div>
+
+    <!-- Floating Audio Control Button (Fixed top-right for mobile reachability) -->
+    <div class="fixed top-3 right-3 z-50">
+        <button id="music-toggle" onclick="toggleMusic()" class="flex items-center gap-2 bg-white/95 backdrop-blur-md border border-warmGold/60 text-deepRose px-3.5 py-2 rounded-full shadow-md active:scale-95 transition-all">
+            <i id="music-icon" class="fa-solid fa-music text-sm animate-pulse"></i>
+            <span id="music-text" class="text-xs font-semibold">Bật Nhạc</span>
+        </button>
+    </div>
+
+    <!-- Hero Section -->
+    <header class="relative min-h-[90vh] flex flex-col items-center justify-center text-center px-5 pt-12 pb-16 z-20">
+        <div class="inline-flex items-center gap-1.5 bg-white/90 border border-warmGold/40 px-4 py-1.5 rounded-full shadow-sm mb-5">
+            <i class="fa-solid fa-heart text-rose-500 text-xs"></i>
+            <span class="text-[11px] sm:text-xs font-bold tracking-widest text-neutral-700 uppercase">20 Tháng 10 - Phụ Nữ Việt Nam</span>
+            <i class="fa-solid fa-sparkles text-warmGold text-xs"></i>
+        </div>
+
+        <h1 class="font-serif text-3xl sm:text-5xl font-bold text-neutral-900 mb-3 tracking-tight">
+            Gửi Chị Yêu Dấu <br>
+            <span class="font-script text-deepRose text-4xl sm:text-6xl block mt-2 glow-gold leading-tight">Bao Thị Quỳnh Như</span>
+        </h1>
+
+        <p class="max-w-xs sm:max-w-md mx-auto text-neutral-600 text-xs sm:text-sm mb-8 leading-relaxed font-light">
+            Chúc người chị tuyệt vời nhất của em một ngày 20/10 ngập tràn hoa hồng, luôn xinh đẹp rạng rỡ và hạnh phúc viên mãn!
+        </p>
+
+        <div class="flex flex-col w-full max-w-xs gap-3">
+            <a href="#letter-section" class="bg-gradient-to-r from-rose-600 to-deepRose text-white font-semibold py-3.5 px-6 rounded-2xl shadow-lg shadow-rose-600/30 flex items-center justify-center gap-2 active:scale-95 transition-all text-sm">
+                <i class="fa-solid fa-envelope-open-text"></i> Mở Bức Thư Yêu Thương
+            </a>
+            <a href="#wishes-section" class="bg-white/90 border border-warmGold/50 text-neutral-800 font-semibold py-3 px-6 rounded-2xl shadow-sm flex items-center justify-center gap-2 active:scale-95 transition-all text-sm">
+                <i class="fa-solid fa-gift text-warmGold"></i> Xem Lời Chúc & Kỷ Niệm
+            </a>
+        </div>
+
+        <div class="absolute bottom-4 left-1/2 -translate-x-1/2 flex flex-col items-center opacity-60">
+            <i class="fa-solid fa-chevron-down text-rose-500 text-xs animate-bounce"></i>
+        </div>
+    </header>
+
+    <!-- Envelope Letter Section (Interactive 3D Touch card) -->
+    <section id="letter-section" class="py-12 px-4 max-w-lg mx-auto z-20 relative">
+        <div class="text-center mb-8">
+            <h2 class="font-serif text-2xl sm:text-3xl font-bold text-neutral-900 mb-2">Bức Thư Riêng Tư</h2>
+            <div class="w-12 h-1 bg-warmGold mx-auto rounded-full mb-2"></div>
+            <p class="text-neutral-500 text-xs">Chạm vào phong thư bên dưới để đọc lời nhắn gửi</p>
+        </div>
+
+        <!-- Envelope Card -->
+        <div class="relative w-full cursor-pointer" onclick="openEnvelope()">
+            <!-- Closed Envelope State -->
+            <div id="envelope-closed" class="bg-gradient-to-br from-rose-100 via-pink-100 to-amber-50 border-2 border-warmGold/50 rounded-3xl shadow-xl p-8 text-center relative overflow-hidden transition-all duration-300 active:scale-[0.98]">
+                <div class="w-16 h-16 bg-white border border-warmGold rounded-full flex items-center justify-center mx-auto mb-4 shadow-sm animate-pulse">
+                    <i class="fa-solid fa-heart text-2xl text-deepRose"></i>
+                </div>
+                <h3 class="font-serif text-xl font-bold text-neutral-800 mb-1">Gửi Chị: Bao Thị Quỳnh Như</h3>
+                <span class="inline-block bg-warmGold/20 text-neutral-800 text-[11px] font-semibold px-3 py-1 rounded-full uppercase tracking-wider mt-2">Chạm để mở thư ngay</span>
+            </div>
+
+            <!-- Opened Letter State (Hidden initially) -->
+            <div id="envelope-opened" class="hidden glass-panel rounded-3xl shadow-2xl p-6 sm:p-8 relative border border-warmGold/40 animate-fadeIn">
+                <div class="absolute top-3 right-3">
+                    <button onclick="event.stopPropagation(); closeEnvelope();" class="text-neutral-400 hover:text-neutral-700 p-2 text-sm">
+                        <i class="fa-solid fa-xmark text-lg"></i>
+                    </button>
+                </div>
+
+                <div class="text-center mb-4 pt-2">
+                    <span class="font-script text-2xl sm:text-3xl text-deepRose">Chị Quỳnh Như yêu dấu của em,</span>
+                </div>
+
+                <div class="space-y-3 text-neutral-700 text-xs sm:text-sm leading-relaxed font-light">
+                    <p>
+                        Nhân dịp 20/10 - Ngày Phụ nữ Việt Nam, em muốn gửi đến người chị gái tuyệt vời nhất của em những lời chúc chân thành và tốt đẹp nhất từ đáy lòng. Cảm ơn chị vì luôn là chỗ dựa ấm áp, luôn thấu hiểu, yêu thương và sẻ chia mọi buồn vui cùng em.
+                    </p>
+                    <p>
+                        Chị Như trong mắt em là một người phụ nữ vô cùng giỏi giang, kiên cường và tràn đầy năng lượng tích cực. Nhìn cách chị luôn nỗ lực hết mình cho công việc và gia đình, em luôn cảm thấy rất tự hào và ngưỡng mộ.
+                    </p>
+                    <p>
+                        Em chúc chị ngày hôm nay và 365 ngày trong năm đều ngập tràn niềm vui, sức khỏe dồi dào, luôn giữ được nụ cười rạng rỡ trên môi. Chúc mọi hoài bão và dự định của chị trên con đường sự nghiệp đều sẽ nở hoa thành công rực rỡ!
+                    </p>
+                    <p class="font-medium text-neutral-800 pt-2">
+                        Thương chị thật nhiều! ❤️
+                    </p>
+                </div>
+
+                <div class="mt-6 pt-4 border-t border-rose-100 flex justify-between items-center text-[11px] text-neutral-500">
+                    <span>Món quà 20/10 đặc biệt</span>
+                    <span class="font-script text-lg text-deepRose font-bold">Bé em của chị</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Wishes Cards Section (Swipeable / Accordion optimized for mobile) -->
+    <section id="wishes-section" class="py-12 px-4 max-w-lg mx-auto z-20 relative">
+        <div class="text-center mb-8">
+            <h2 class="font-serif text-2xl sm:text-3xl font-bold text-neutral-900 mb-2">Lời Chúc Yêu Thương</h2>
+            <div class="w-12 h-1 bg-warmGold mx-auto rounded-full mb-2"></div>
+            <p class="text-neutral-500 text-xs">Thông điệp ý nghĩa gửi riêng chị Quỳnh Như</p>
+        </div>
+
+        <div class="space-y-4">
+            <!-- Wish Card 1 -->
+            <div class="glass-panel p-5 rounded-2xl shadow-md border-l-4 border-l-rose-500">
+                <div class="flex items-center gap-3 mb-2">
+                    <div class="w-10 h-10 bg-rose-100 text-rose-600 rounded-xl flex items-center justify-center text-base">
+                        <i class="fa-solid fa-seedling"></i>
+                    </div>
+                    <h3 class="font-serif text-base font-bold text-neutral-900">Luôn Tươi Trẻ & Xinh Đẹp</h3>
+                </div>
+                <p class="text-neutral-600 text-xs sm:text-sm leading-relaxed">
+                    Chúc chị Quỳnh Như mãi xinh đẹp rạng ngời, thanh xuân phơi phới, luôn giữ được nét hồn nhiên, yêu đời và nụ cười tỏa nắng mỗi ngày.
+                </p>
+            </div>
+
+            <!-- Wish Card 2 -->
+            <div class="glass-panel p-5 rounded-2xl shadow-md border-l-4 border-l-warmGold">
+                <div class="flex items-center gap-3 mb-2">
+                    <div class="w-10 h-10 bg-amber-100 text-amber-700 rounded-xl flex items-center justify-center text-base">
+                        <i class="fa-solid fa-briefcase"></i>
+                    </div>
+                    <h3 class="font-serif text-base font-bold text-neutral-900">Thành Công & Thăng Tiến</h3>
+                </div>
+                <p class="text-neutral-600 text-xs sm:text-sm leading-relaxed">
+                    Chúc cho mọi dự định trong công việc của chị luôn thuận lợi, gặt hái thật nhiều thành tựu lớn và tiến xa hơn nữa trên con đường sự nghiệp.
+                </p>
+            </div>
+
+            <!-- Wish Card 3 -->
+            <div class="glass-panel p-5 rounded-2xl shadow-md border-l-4 border-l-deepRose">
+                <div class="flex items-center gap-3 mb-2">
+                    <div class="w-10 h-10 bg-pink-100 text-deepRose rounded-xl flex items-center justify-center text-base">
+                        <i class="fa-solid fa-face-smile-beam"></i>
+                    </div>
+                    <h3 class="font-serif text-base font-bold text-neutral-900">Bình An & Hạnh Phúc</h3>
+                </div>
+                <p class="text-neutral-600 text-xs sm:text-sm leading-relaxed">
+                    Mong rằng cuộc sống sẽ luôn đối xử thật dịu dàng với chị, mang lại cho chị bình yên, sức khỏe và hạnh phúc trọn vẹn.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Photo Gallery / Mobile Horizontal Swipe Slider -->
+    <section class="py-12 px-4 max-w-lg mx-auto z-20 relative">
+        <div class="text-center mb-6">
+            <h2 class="font-serif text-2xl sm:text-3xl font-bold text-neutral-900 mb-2">Khoảnh Khắc Kỷ Niệm</h2>
+            <div class="w-12 h-1 bg-warmGold mx-auto rounded-full mb-2"></div>
+            <p class="text-neutral-500 text-xs">Vuốt ngang để xem thêm hình ảnh của chị</p>
+        </div>
+
+        <!-- Horizontal Scrollable Container -->
+        <div class="flex gap-4 overflow-x-auto no-scrollbar snap-x snap-mandatory px-2 pb-4">
+            <!-- Slide 1 -->
+            <div class="min-w-[260px] sm:min-w-[280px] snap-center glass-panel p-3 rounded-2xl shadow-md flex-shrink-0">
+                <div class="h-60 rounded-xl overflow-hidden relative bg-rose-50 flex items-center justify-center">
+                    <img src="https://placehold.co/500x600/fce4ec/ad1457?text=Quynh+Nhu+1" alt="Chị Quỳnh Như" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/500x600/fce4ec/ad1457?text=Chị+Như'">
+                </div>
+                <p class="text-center mt-3 text-xs font-semibold text-neutral-700">Chị Quỳnh Như xinh đẹp rạng rỡ</p>
+            </div>
+
+            <!-- Slide 2 -->
+            <div class="min-w-[260px] sm:min-w-[280px] snap-center glass-panel p-3 rounded-2xl shadow-md flex-shrink-0">
+                <div class="h-60 rounded-xl overflow-hidden relative bg-rose-50 flex items-center justify-center">
+                    <img src="https://placehold.co/500x600/fce4ec/ad1457?text=Quynh+Nhu+2" alt="Kỷ Niệm" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/500x600/fce4ec/ad1457?text=Bình+Yên'">
+                </div>
+                <p class="text-center mt-3 text-xs font-semibold text-neutral-700">Khoảnh khắc bình yên và hạnh phúc</p>
+            </div>
+
+            <!-- Slide 3 -->
+            <div class="min-w-[260px] sm:min-w-[280px] snap-center glass-panel p-3 rounded-2xl shadow-md flex-shrink-0">
+                <div class="h-60 rounded-xl overflow-hidden relative bg-rose-50 flex items-center justify-center">
+                    <img src="https://placehold.co/500x600/fce4ec/ad1457?text=Quynh+Nhu+3" alt="Nụ Cười" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/500x600/fce4ec/ad1457?text=Nụ+Cười'">
+                </div>
+                <p class="text-center mt-3 text-xs font-semibold text-neutral-700">Mãi giữ nụ cười tươi thế này nhé</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Surprise Button -->
+    <section class="py-10 px-4 text-center z-20 relative max-w-lg mx-auto">
+        <div class="glass-panel p-6 rounded-3xl shadow-xl border border-warmGold/40">
+            <h3 class="font-serif text-xl font-bold text-neutral-900 mb-2">Tạo Thêm Bất Ngờ Cho Chị?</h3>
+            <p class="text-neutral-600 text-xs mb-6">Chạm vào nút bên dưới để kích hoạt màn pháo hoa và mưa hoa hồng mừng 20/10!</p>
+            <button onclick="triggerCelebration()" class="w-full bg-gradient-to-r from-warmGold via-amber-600 to-rose-600 text-white font-semibold py-3.5 px-6 rounded-2xl shadow-lg shadow-amber-500/25 active:scale-95 transition-all text-sm flex items-center justify-center gap-2">
+                <i class="fa-solid fa-wand-magic-sparkles"></i> Bắn Pháo Hoa Chúc Mừng 20/10
+            </button>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-8 bg-white/70 backdrop-blur-md border-t border-rose-100 text-center z-20 relative">
+        <div class="max-w-md mx-auto px-4">
+            <div class="flex justify-center items-center gap-1.5 mb-2">
+                <i class="fa-solid fa-heart text-deepRose text-xs"></i>
+                <span class="font-serif text-sm font-bold text-neutral-800">Chúc Mừng 20/10 Phụ Nữ Việt Nam</span>
+                <i class="fa-solid fa-heart text-deepRose text-xs"></i>
+            </div>
+            <p class="text-neutral-500 text-[11px]">Dành tặng chị yêu quý: <span class="font-semibold text-deepRose">Bao Thị Quỳnh Như</span></p>
+        </div>
+    </footer>
+
+    <!-- JavaScript logic -->
+    <script>
+        // --- Falling Petals Animation (Optimized for mobile performance) ---
+        const petalsContainer = document.getElementById('petals-container');
+        const petalIcons = ['fa-solid fa-spa', 'fa-solid fa-heart', 'fa-solid fa-seedling'];
+        const colors = ['text-rose-300', 'text-pink-300', 'text-rose-400', 'text-amber-200'];
+
+        function createPetal() {
+            const petal = document.createElement('div');
+            petal.className = `petal ${colors[Math.floor(Math.random() * colors.length)]}`;
+            petal.innerHTML = `<i class="${petalIcons[Math.floor(Math.random() * petalIcons.length)]}"></i>`;
+            
+            const startX = Math.random() * window.innerWidth;
+            const size = Math.random() * 10 + 10; // 10px - 20px
+            const duration = Math.random() * 5 + 4; // 4s - 9s
+            const delay = Math.random() * 4;
+
+            petal.style.left = `${startX}px`;
+            petal.style.fontSize = `${size}px`;
+            petal.style.animationDuration = `${duration}s`;
+            petal.style.animationDelay = `${delay}s`;
+
+            petalsContainer.appendChild(petal);
+
+            setTimeout(() => {
+                petal.remove();
+            }, (duration + delay) * 1000);
+        }
+
+        // Initialize optimized petal count for mobile screens
+        for (let i = 0; i < 15; i++) {
+            createPetal();
+        }
+        setInterval(createPetal, 700);
+
+        // --- Celebration / Fireworks ---
+        function triggerCelebration() {
+            for (let i = 0; i < 20; i++) {
+                setTimeout(createPetal, i * 30);
+            }
+            confetti({
+                particleCount: 80,
+                spread: 70,
+                origin: { y: 0.6 },
+                colors: ['#C5A059', '#AD1457', '#E0A899', '#FDF2F4', '#FDF8E2']
+            });
+        }
+
+        // --- Envelope Interaction ---
+        let isEnvelopeOpen = false;
+        function openEnvelope() {
+            if (isEnvelopeOpen) return;
+            isEnvelopeOpen = true;
+            const closedDiv = document.getElementById('envelope-closed');
+            const openedDiv = document.getElementById('envelope-opened');
+
+            closedDiv.classList.add('scale-95', 'opacity-0');
+            setTimeout(() => {
+                closedDiv.classList.add('hidden');
+                openedDiv.classList.remove('hidden');
+                confetti({
+                    particleCount: 50,
+                    spread: 60,
+                    origin: { y: 0.7 }
+                });
+            }, 250);
+        }
+
+        function closeEnvelope() {
+            isEnvelopeOpen = false;
+            const closedDiv = document.getElementById('envelope-closed');
+            const openedDiv = document.getElementById('envelope-opened');
+
+            openedDiv.classList.add('hidden');
+            closedDiv.classList.remove('hidden', 'scale-95', 'opacity-0');
+        }
+
+        // --- Background Music with Tone.js ---
+        let synth = null;
+        let musicPlaying = false;
+        let melodyLoop = null;
+
+        async function toggleMusic() {
+            const icon = document.getElementById('music-icon');
+            const text = document.getElementById('music-text');
+
+            if (!musicPlaying) {
+                await Tone.start();
+                synth = new Tone.PolySynth(Tone.Synth, {
+                    oscillator: { type: 'sine' },
+                    envelope: { attack: 0.5, decay: 1, sustain: 0.5, release: 2 }
+                }).toDestination();
+                synth.volume.value = -12;
+
+                const notes = ['C4', 'E4', 'G4', 'B4', 'C5', 'A4', 'F4', 'G4'];
+                let index = 0;
+
+                melodyLoop = new Tone.Loop(time => {
+                    synth.triggerAttackRelease(notes[index], '2n', time);
+                    index = (index + 1) % notes.length;
+                }, '2n').start(0);
+
+                Tone.Transport.start();
+                musicPlaying = true;
+
+                icon.className = 'fa-solid fa-volume-high text-sm text-rose-600 animate-bounce';
+                text.innerText = 'Tắt Nhạc';
+            } else {
+                if (melodyLoop) {
+                    melodyLoop.stop();
+                    melodyLoop.dispose();
+                }
+                if (synth) {
+                    synth.dispose();
+                }
+                Tone.Transport.stop();
+                musicPlaying = false;
+
+                icon.className = 'fa-solid fa-music text-sm animate-pulse';
+                text.innerText = 'Bật Nhạc';
+            }
+        }
+    </script>
+</body>
+</html>
+```
+eof
+
+### Các điểm tối ưu tuyệt đối cho điện thoại di động:
+1. **Thiết kế Mobile-First:** Khoảng cách lề, font chữ, kích thước nút bấm được căn chỉnh gọn gàng, vừa vặn trên màn hình dọc smartphone.
+2. **Hiệu ứng hoa rơi tinh gọn:** Số lượng cánh hoa vừa phải giúp máy điện thoại Android và iPhone chạy cực kỳ mượt mà, không bị giật lag hay hao pin.
+3. **Phong thư 3D cảm ứng:** Chạm mượt mà để mở bức thư tình cảm dành riêng cho chị **Bao Thị Quỳnh Như**.
+4. **Băng chuyền ảnh vuốt ngang (Horizontal Swipe):** Tối ưu thao tác vuốt ngón tay tự nhiên trên di động.
+5. **Nút âm nhạc tiện lợi:** Nằm góc trên cùng bên phải giúp người dùng dễ dàng bật/tắt nhạc nền bất cứ lúc nào.
