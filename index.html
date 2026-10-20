@@ -2,7 +2,7 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Chúc Mừng 20/10 - Chị Bao Thị Quỳnh Như</title>
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
@@ -19,15 +19,10 @@
             --champagne: #fdfbf7;
             --text-dark: #4a3b3c;
             --accent: #e0a96d;
-            --card-bg: rgba(255, 255, 255, 0.85);
+            --card-bg: rgba(255, 255, 255, 0.9);
         }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            -webkit-tap-highlight-color: transparent;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
 
         body {
             background-color: var(--champagne);
@@ -37,6 +32,7 @@
             min-height: 100vh;
             overflow-x: hidden;
             position: relative;
+            padding-bottom: 50px;
         }
 
         /* Hiệu ứng hoa rơi */
@@ -52,29 +48,21 @@
         }
 
         @keyframes fall {
-            0% {
-                transform: translateY(-10vh) translateX(0) rotate(0deg);
-                opacity: 0.8;
-            }
-            50% {
-                transform: translateY(50vh) translateX(50px) rotate(180deg);
-            }
-            100% {
-                transform: translateY(110vh) translateX(-50px) rotate(360deg);
-                opacity: 0;
-            }
+            0% { transform: translateY(-10vh) translateX(0) rotate(0deg); opacity: 0.8; }
+            50% { transform: translateY(50vh) translateX(50px) rotate(180deg); }
+            100% { transform: translateY(110vh) translateX(-50px) rotate(360deg); opacity: 0; }
         }
 
         /* Container chính tối ưu mobile */
         .container {
-            max-width: 480px;
+            max-width: 500px;
             margin: 0 auto;
-            padding: 20px 16px 60px 16px;
+            padding: 0 16px;
             position: relative;
             z-index: 2;
         }
 
-        /* Nút bật nhạc nổi */
+        /* Nút bật nhạc */
         .music-btn {
             position: fixed;
             top: 15px;
@@ -94,391 +82,183 @@
             z-index: 100;
             transition: all 0.3s ease;
         }
+        .music-btn.playing { background: var(--rose-gold); color: white; animation: pulse 1.5s infinite; }
+        @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(183, 110, 121, 0.4); } 70% { box-shadow: 0 0 0 12px rgba(183, 110, 121, 0); } 100% { box-shadow: 0 0 0 0 rgba(183, 110, 121, 0); } }
 
-        .music-btn.playing {
-            background: var(--rose-gold);
-            color: white;
-            animation: pulse 1.5s infinite;
-        }
+        /* Header */
+        header { text-align: center; padding: 40px 0 30px 0; }
+        .date-badge { display: inline-block; background: var(--primary-light); color: var(--primary); padding: 6px 16px; border-radius: 20px; font-size: 13px; font-weight: 600; letter-spacing: 1px; margin-bottom: 12px; box-shadow: 0 2px 8px rgba(212, 93, 121, 0.15); }
+        h1 { font-family: 'Playfair Display', serif; font-size: 28px; color: var(--text-dark); line-height: 1.3; margin-bottom: 10px; }
+        h1 span { color: var(--primary); font-family: 'Dancing Script', cursive; font-size: 42px; display: block; margin-top: 5px; }
+        .subtitle { font-size: 16px; color: #7a6b6d; font-weight: 300; max-width: 360px; margin: 0 auto; line-height: 1.5;}
 
-        @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(183, 110, 121, 0.4); }
-            70% { box-shadow: 0 0 0 12px rgba(183, 110, 121, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(183, 110, 121, 0); }
-        }
+        /* Bức thư */
+        .envelope-section { margin: 20px 0; }
+        .envelope-card { background: var(--card-bg); backdrop-filter: blur(10px); border-radius: 22px; padding: 28px; box-shadow: 0 12px 35px rgba(183, 110, 121, 0.15); border: 1px solid rgba(255, 255, 255, 0.9); text-align: center; position: relative; overflow: hidden; }
+        .envelope-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 5px; background: linear-gradient(90deg, var(--primary), var(--accent)); }
+        .letter-icon { font-size: 48px; color: var(--primary); margin-bottom: 15px; animation: bounce 2s infinite; }
+        @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+        .letter-content { font-size: 16px; line-height: 1.8; color: #5a4a4b; text-align: left; margin-top: 20px; display: none; animation: fadeIn 0.8s ease forwards; }
+        .letter-content p { margin-bottom: 15px; }
+        .letter-content .signature { text-align: right; font-family: 'Dancing Script', cursive; font-size: 28px; color: var(--primary); margin-top: 20px; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+        .open-letter-btn { background: linear-gradient(135deg, var(--primary), var(--rose-gold)); color: white; border: none; padding: 14px 32px; border-radius: 30px; font-size: 16px; font-weight: 600; cursor: pointer; box-shadow: 0 6px 18px rgba(212, 93, 121, 0.4); transition: all 0.3s ease; margin-top: 15px; }
+        .open-letter-btn:active { transform: scale(0.97); }
 
-        /* Header Chào Mừng */
-        header {
-            text-align: center;
-            padding: 30px 0 20px 0;
-        }
+        /* Mục Kỷ Niệm */
+        .memories-section { margin: 40px 0; text-align: center; }
+        .section-title { font-family: 'Playfair Display', serif; font-size: 24px; color: var(--text-dark); margin-bottom: 8px; }
+        .section-desc { font-size: 14px; color: #8c787a; margin-bottom: 25px; }
+        
+        .photo-card { background: white; padding: 14px 14px 18px 14px; border-radius: 22px; box-shadow: 0 10px 30px rgba(183, 110, 121, 0.18); max-width: 380px; margin: 0 auto; border: 1px solid #f0e1e4; transform: rotate(-1deg); transition: transform 0.3s ease; }
+        .photo-card:hover { transform: rotate(0deg); }
+        .photo-container { width: 100%; height: 450px; border-radius: 16px; overflow: hidden; position: relative; background-color: #f8f0f2; }
+        
+        /* Ảnh thật của chị Quỳnh Như đã tải lên */
+        .photo-container img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.5s ease; }
+        .photo-container:hover img { transform: scale(1.05); }
 
-        .date-badge {
-            display: inline-block;
-            background: var(--primary-light);
-            color: var(--primary);
-            padding: 6px 16px;
-            border-radius: 20px;
-            font-size: 13px;
-            font-weight: 600;
-            letter-spacing: 1px;
-            margin-bottom: 12px;
-            box-shadow: 0 2px 8px rgba(212, 93, 121, 0.15);
-        }
+        .photo-caption { margin-top: 15px; font-size: 16px; color: var(--rose-gold); font-weight: 600; font-style: italic; font-family: 'Playfair Display', serif; }
 
-        h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: 26px;
-            color: var(--text-dark);
-            line-height: 1.4;
-            margin-bottom: 8px;
-        }
+        /* Thẻ Lời Chúc */
+        .wishes-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 35px; }
+        .wish-box { background: var(--card-bg); padding: 20px; border-radius: 18px; text-align: center; border: 1px solid rgba(255, 255, 255, 0.9); box-shadow: 0 6px 20px rgba(183, 110, 121, 0.08); transition: transform 0.3s ease; }
+        .wish-box:hover { transform: translateY(-5px); }
+        .wish-box i { font-size: 28px; color: var(--primary); margin-bottom: 12px; }
+        .wish-box h4 { font-size: 16px; margin-bottom: 6px; color: var(--text-dark); font-weight: 600; }
+        .wish-box p { font-size: 14px; color: #776567; line-height: 1.5; }
 
-        h1 span {
-            color: var(--primary);
-            font-family: 'Dancing Script', cursive;
-            font-size: 38px;
-            display: block;
-            margin-top: 4px;
-        }
+        /* Nút tương tác */
+        .action-area { text-align: center; margin-top: 40px; }
+        .love-btn { background: white; color: var(--primary); border: 2px solid var(--primary); padding: 14px 30px; border-radius: 30px; font-size: 15px; font-weight: 600; cursor: pointer; box-shadow: 0 6px 18px rgba(212, 93, 121, 0.15); transition: all 0.3s ease; }
+        .love-btn:active { background: var(--primary); color: white; transform: translateY(2px); }
 
-        .subtitle {
-            font-size: 14px;
-            color: #7a6b6d;
-            font-weight: 300;
-        }
+        /* Footer */
+        footer { text-align: center; margin-top: 50px; font-size: 13px; color: #9e888a; letter-spacing: 0.5px; }
 
-        /* Bức Thư Phong Bì Mở */
-        .envelope-section {
-            margin: 20px 0;
-        }
-
-        .envelope-card {
-            background: var(--card-bg);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 24px;
-            box-shadow: 0 10px 30px rgba(183, 110, 121, 0.12);
-            border: 1px solid rgba(255, 255, 255, 0.8);
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .envelope-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, var(--primary), var(--accent));
-        }
-
-        .letter-icon {
-            font-size: 40px;
-            color: var(--primary);
-            margin-bottom: 12px;
-            animation: bounce 2s infinite;
-        }
-
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-8px); }
-        }
-
-        .letter-content {
-            font-size: 15px;
-            line-height: 1.7;
-            color: #5a4a4b;
-            text-align: left;
-            margin-top: 15px;
-            display: none;
-            animation: fadeIn 0.8s ease forwards;
-        }
-
-        .letter-content p {
-            margin-bottom: 12px;
-        }
-
-        .letter-content .signature {
-            text-align: right;
-            font-family: 'Dancing Script', cursive;
-            font-size: 24px;
-            color: var(--primary);
-            margin-top: 15px;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .open-letter-btn {
-            background: linear-gradient(135deg, var(--primary), var(--rose-gold));
-            color: white;
-            border: none;
-            padding: 12px 28px;
-            border-radius: 25px;
-            font-size: 15px;
-            font-weight: 600;
-            cursor: pointer;
-            box-shadow: 0 4px 15px rgba(212, 93, 121, 0.3);
-            transition: all 0.3s ease;
-            margin-top: 10px;
-        }
-
-        .open-letter-btn:active {
-            transform: scale(0.96);
-        }
-
-        /* Mục Khoảnh Khắc Kỷ Niệm (Đã thêm ảnh của chị) */
-        .memories-section {
-            margin: 30px 0;
-            text-align: center;
-        }
-
-        .section-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 22px;
-            color: var(--text-dark);
-            margin-bottom: 6px;
-        }
-
-        .section-desc {
-            font-size: 13px;
-            color: #8c787a;
-            margin-bottom: 20px;
-        }
-
-        .photo-card {
-            background: white;
-            padding: 12px 12px 16px 12px;
-            border-radius: 18px;
-            box-shadow: 0 8px 25px rgba(183, 110, 121, 0.15);
-            max-width: 340px;
-            margin: 0 auto;
-            border: 1px solid #f0e1e4;
-        }
-
-        .photo-container {
-            width: 100%;
-            height: 420px;
-            border-radius: 12px;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .photo-container img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-            transition: transform 0.5s ease;
-        }
-
-        .photo-container:hover img {
-            transform: scale(1.03);
-        }
-
-        .photo-caption {
-            margin-top: 12px;
-            font-size: 14px;
-            color: var(--rose-gold);
-            font-weight: 500;
-            font-style: italic;
-        }
-
-        /* Lời Chúc Ngắn Gọn */
-        .wishes-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-            margin-top: 25px;
-        }
-
-        .wish-box {
-            background: var(--card-bg);
-            padding: 16px;
-            border-radius: 14px;
-            text-align: center;
-            border: 1px solid rgba(255, 255, 255, 0.9);
-            box-shadow: 0 4px 12px rgba(183, 110, 121, 0.08);
-        }
-
-        .wish-box i {
-            font-size: 22px;
-            color: var(--primary);
-            margin-bottom: 8px;
-        }
-
-        .wish-box h4 {
-            font-size: 14px;
-            margin-bottom: 4px;
-            color: var(--text-dark);
-        }
-
-        .wish-box p {
-            font-size: 12px;
-            color: #776567;
-            line-height: 1.4;
-        }
-
-        /* Nút tương tác tạo pháo hoa/hoa */
-        .action-area {
-            text-align: center;
-            margin-top: 30px;
-        }
-
-        .love-btn {
-            background: white;
-            color: var(--primary);
-            border: 2px solid var(--primary);
-            padding: 10px 24px;
-            border-radius: 20px;
-            font-size: 14px;
-            font-weight: 600;
-            cursor: pointer;
-            box-shadow: 0 4px 12px rgba(212, 93, 121, 0.15);
-            transition: all 0.3s;
-        }
-
-        .love-btn:active {
-            background: var(--primary);
-            color: white;
-        }
-
-        /* Footer nhỏ gọn */
-        footer {
-            text-align: center;
-            margin-top: 40px;
-            font-size: 12px;
-            color: #9e888a;
+        /* Responsive Mobile */
+        @media (max-width: 420px) {
+            h1 { font-size: 24px; }
+            h1 span { font-size: 36px; }
+            .photo-container { height: 380px; }
+            .photo-card { transform: none; }
+            .envelope-card { padding: 20px; }
+            .wishes-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Nút phát nhạc -->
     <button class="music-btn" id="musicBtn" onclick="toggleMusic()" title="Phát nhạc du dương">
         <i class="fa-solid fa-music" id="musicIcon"></i>
     </button>
 
     <div class="container">
-        <!-- Header -->
         <header>
-            <div class="date-badge"><i class="fa-solid fa-heart"></i> 20 Tháng 10</div>
+            <div class="date-badge"><i class="fa-solid fa-heart"></i> 20 THÁNG 10</div>
             <h1>Gửi Gắm Yêu Thương Đến<br><span>Bao Thị Quỳnh Như</span></h1>
-            <p class="subtitle">Chúc chị một ngày Phụ nữ Việt Nam tràn ngập hạnh phúc và nụ cười!</p>
+            <p class="subtitle">Chúc chị một ngày Phụ nữ Việt Nam thật trọn vẹn, hạnh phúc và rạng ngời như chính nụ cười của chị!</p>
         </header>
 
-        <!-- Bức thư mở tương tác -->
         <section class="envelope-section">
             <div class="envelope-card">
                 <div id="letterClosed">
                     <div class="letter-icon">
                         <i class="fa-solid fa-envelope-open-text"></i>
                     </div>
-                    <h3 style="font-family: 'Playfair Display', serif; margin-bottom: 8px; font-size: 18px;">Một Bức Thư Nhỏ Dành Cho Chị</h3>
-                    <p style="font-size: 13px; color: #7a6b6d; margin-bottom: 15px;">Nhấn vào nút bên dưới để mở lời chúc từ em nhé.</p>
+                    <h3 style="font-family: 'Playfair Display', serif; margin-bottom: 8px; font-size: 20px; color: var(--text-dark);">Một Bức Thư Nhỏ Dành Cho Chị</h3>
+                    <p style="font-size: 14px; color: #7a6b6d; margin-bottom: 20px; max-width: 300px; margin-left: auto; margin-right: auto;">Nhấn vào nút bên dưới để mở lời chúc từ em nhé.</p>
                     <button class="open-letter-btn" onclick="openLetter()">Mở Thư Ngay <i class="fa-solid fa-wand-magic-sparkles"></i></button>
                 </div>
 
                 <div class="letter-content" id="letterOpen">
                     <p>Gửi chị <strong>Bao Thị Quỳnh Như</strong> yêu quý của em,</p>
-                    <p>Nhân ngày 20/10 - ngày Phụ nữ Việt Nam, em muốn gửi đến chị những lời chúc tốt đẹp nhất. Cảm ơn chị luôn là người chị dịu dàng, chu đáo và là chỗ dựa tinh thần ấm áp.</p>
-                    <p>Chúc chị luôn xinh đẹp rạng rỡ như ánh nắng ban mai, luôn kiêu hãnh, tự tin và gặt hái được thật nhiều thành công, niềm vui trong cuộc sống.</p>
-                    <p>Mong rằng mỗi ngày trôi qua của chị đều ngập tràn tiếng cười và sự ngọt ngào!</p>
-                    <div class="signature">Thương chị rất nhiều! ❤️</div>
+                    <p>Nhân ngày 20/10 - ngày Phụ nữ Việt Nam, em muốn gửi đến chị những lời chúc tốt đẹp nhất. Cảm ơn chị luôn là người chị dịu dàng, chu đáo, luôn lắng nghe và là chỗ dựa tinh thần ấm áp.</p>
+                    <p>Chúc chị luôn xinh đẹp rạng rỡ như ánh nắng ban mai, luôn kiêu hãnh, tự tin và gặt hái được thật nhiều thành công, niềm vui trên con đường mình đã chọn. Mong rằng mỗi ngày trôi qua của chị đều ngập tràn tiếng cười và sự ngọt ngào!</p>
+                    <p>Thương chị nhiều lắm! ❤️</p>
+                    <div class="signature">Em của chị</div>
                 </div>
             </div>
         </section>
 
-        <!-- Khoảnh Khắc Kỷ Niệm (Đã chèn ảnh thật của chị) -->
+        <!-- MỤC KỶ NIỆM (Hiển thị ảnh chi_nhu.jpg) -->
         <section class="memories-section">
             <h2 class="section-title">Khoảnh Khắc Kỷ Niệm</h2>
             <p class="section-desc">Nụ cười và vẻ đẹp rạng ngời của chị</p>
             
             <div class="photo-card">
                 <div class="photo-container">
-                    <!-- Ảnh trực tiếp của chị Bao Thị Quỳnh Như -->
-                    <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=1000&auto=format&fit=crop" alt="Bao Thị Quỳnh Như" id="realPhoto">
+                    <img src="chi_nhu.jpg" alt="Bao Thị Quỳnh Như" id="realPhoto">
                 </div>
-                <div class="photo-caption">Chị Quỳnh Như xinh đẹp rạng rỡ 🌸</div>
+                <div class="photo-caption">Chị Quỳnh Như xinh đẹp rạng rỡ nhất 💖</div>
             </div>
         </section>
 
-        <!-- Các thẻ chúc ngắn gọn -->
         <div class="wishes-grid">
             <div class="wish-box">
                 <i class="fa-solid fa-face-smile-beam"></i>
-                <h4>Luôn Vui Tươi</h4>
-                <p>Mong nụ cười luônở trên môi chị mỗi ngày.</p>
+                <h4>Luôn Hạnh Phúc</h4>
+                <p>Mong nụ cười rạng rỡ luôn nở trên môi chị mỗi ngày.</p>
             </div>
             <div class="wish-box">
                 <i class="fa-solid fa-spa"></i>
-                <h4>Sức Khỏe & Bình An</h4>
-                <p>Luôn tràn đầy năng lượng và bình an trong tâm hồn.</p>
+                <h4>An Yên & Bình An</h4>
+                <p>Luôn tràn đầy năng lượng tích cực và an yên trong tâm hồn.</p>
             </div>
             <div class="wish-box">
                 <i class="fa-solid fa-gem"></i>
                 <h4>Thành Công Rực Rỡ</h4>
-                <p>Mọi dự định và mong ước của chị đều thành hiện thực.</p>
+                <p>Mọi dự định và mong ước của chị đều sớm thành hiện thực.</p>
             </div>
             <div class="wish-box">
                 <i class="fa-solid fa-heart-pulse"></i>
                 <h4>Yêu Thương Ngập Tràn</h4>
-                <p>Luôn được bao bọc bởi những điều ngọt ngào nhất.</p>
+                <p>Được bao bọc bởi những điều ngọt ngào và trọn vẹn nhất.</p>
             </div>
         </div>
 
-        <!-- Tương tác thêm hoa -->
         <div class="action-area">
-            <button class="love-btn" onclick="createFlowerRain()"><i class="fa-solid fa-seedling"></i> Tạo Thêm Hoa Rơi</button>
+            <button class="love-btn" onclick="createFlowerRain()"><i class="fa-solid fa-seedling"></i> Tạo Thêm Cơn Mưa Hoa Rơi</button>
         </div>
 
-        <!-- Footer -->
         <footer>
             <p>Made with ❤️ for Bao Thị Quỳnh Như - 20.10</p>
         </footer>
     </div>
 
-    <!-- Script hiệu ứng & nhạc -->
     <script>
-        // Thay thế ảnh gốc bằng ảnh user tải lên nếu có thể hiển thị trực tiếp từ base64 / link, ở đây dùng ảnh mẫu chất lượng cao hoặc link trực tiếp nếu chạy trên github
-        // Chèn ảnh trực tiếp qua thẻ img bên trên.
-
         // Tạo hiệu ứng cánh hoa rơi liên tục
         function createPetals() {
             const container = document.body;
-            const petalCount = 12;
+            const petalCount = 15;
             for (let i = 0; i < petalCount; i++) {
                 setTimeout(() => {
                     const petal = document.createElement('div');
                     petal.classList.add('petal');
-                    const size = Math.random() * 10 + 10;
+                    const size = Math.random() * 12 + 10;
                     petal.style.width = `${size}px`;
                     petal.style.height = `${size * 1.4}px`;
                     petal.style.left = `${Math.random() * 100}vw`;
-                    petal.style.animationDuration = `${Math.random() * 6 + 4}s`;
+                    petal.style.animationDuration = `${Math.random() * 6 + 5}s`;
                     petal.style.animationDelay = `${Math.random() * 5}s`;
                     container.appendChild(petal);
-                }, i * 400);
+                }, i * 350);
             }
         }
         createPetals();
 
+        // Tạo mưa hoa khi mở thư / bấm nút
         function createFlowerRain() {
-            for (let i = 0; i < 15; i++) {
+            for (let i = 0; i < 25; i++) {
                 const petal = document.createElement('div');
                 petal.classList.add('petal');
-                const size = Math.random() * 12 + 10;
+                const size = Math.random() * 15 + 10;
                 petal.style.width = `${size}px`;
                 petal.style.height = `${size * 1.4}px`;
                 petal.style.left = `${Math.random() * 100}vw`;
                 petal.style.animationDuration = `${Math.random() * 3 + 2}s`;
                 document.body.appendChild(petal);
-                setTimeout(() => petal.remove(), 5000);
+                setTimeout(() => petal.remove(), 6000);
             }
         }
 
@@ -505,7 +285,7 @@
             if (!isPlaying) {
                 synth = new Tone.Synth({
                     oscillator: { type: "sine" },
-                    envelope: { attack: 0.5, decay: 1, sustain: 0.5, release: 2 }
+                    envelope: { attack: 0.5, decay: 1.5, sustain: 0.8, release: 3 }
                 }).toDestination();
                 
                 const notes = ["C4", "E4", "G4", "B4", "C5", "G4", "E4", "D4"];
@@ -514,7 +294,7 @@
                 loop = new Tone.Loop(time => {
                     synth.triggerAttackRelease(notes[index], "2n", time);
                     index = (index + 1) % notes.length;
-                }, "2n").start(0);
+                }, "1n").start(0);
 
                 Tone.Transport.start();
                 isPlaying = true;
@@ -529,6 +309,8 @@
                 icon.className = "fa-solid fa-music";
             }
         }
+
+        document.addEventListener('touchstart', function() {}, false);
     </script>
 </body>
 </html>
